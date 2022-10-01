@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import './questao.dart';
+import 'package:quiz_app/questao.dart';
+import 'package:quiz_app/respostas.dart';
 
 main() {
   runApp(QuizApp());
@@ -35,18 +36,9 @@ class _QuizAppState extends State<QuizApp> {
         body: Column(
           children: <Widget>[
             Questao(perguntas[_perguntaSelecionada]),
-            ElevatedButton(
-              onPressed: _responder,
-              child: Text("Texto do botão 1"),
-            ),
-            ElevatedButton(
-              onPressed: _responder,
-              child: Text("Texto do botão 2"),
-            ),
-            ElevatedButton(
-              onPressed: _responder,
-              child: Text("Texto do botão 3"),
-            ),
+            Resposta("Texto btn 1"),
+            Resposta("Texto btn 2"),
+            Resposta("Texto btn 3"),
           ],
         ),
       ),
