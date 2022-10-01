@@ -13,7 +13,17 @@ class _QuizAppState extends State<QuizApp> {
 
   void _responder() {
     setState(() {
-      _perguntaSelecionada++;
+      if (_perguntaSelecionada < 3) {
+        _perguntaSelecionada++;
+      }
+    });
+
+    print(_perguntaSelecionada);
+  }
+
+  void _zerar() {
+    setState(() {
+      _perguntaSelecionada = 0;
     });
 
     print(_perguntaSelecionada);
@@ -36,9 +46,10 @@ class _QuizAppState extends State<QuizApp> {
         body: Column(
           children: <Widget>[
             Questao(perguntas[_perguntaSelecionada]),
-            Resposta("Texto btn 1"),
-            Resposta("Texto btn 2"),
-            Resposta("Texto btn 3"),
+            Resposta("Texto btn 1", _responder),
+            Resposta("Texto btn 2", _responder),
+            Resposta("Texto btn 3", _responder),
+            Resposta("Voltar para a primeira", _zerar),
           ],
         ),
       ),
