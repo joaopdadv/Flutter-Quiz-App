@@ -6,15 +6,15 @@ main() {
   runApp(QuizApp());
 }
 
-class QuizAppState extends State<QuizApp> {
-  int perguntaSelecionada = 0;
+class _QuizAppState extends State<QuizApp> {
+  int _perguntaSelecionada = 0;
 
-  void responder() {
+  void _responder() {
     setState(() {
-      perguntaSelecionada++;
+      _perguntaSelecionada++;
     });
 
-    print(perguntaSelecionada);
+    print(_perguntaSelecionada);
   }
 
   @override
@@ -33,17 +33,17 @@ class QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: <Widget>[
-            Text(perguntas[perguntaSelecionada]),
+            Text(perguntas[_perguntaSelecionada]),
             ElevatedButton(
-              onPressed: responder,
+              onPressed: _responder,
               child: Text("Texto do botão 1"),
             ),
             ElevatedButton(
-              onPressed: responder,
+              onPressed: _responder,
               child: Text("Texto do botão 2"),
             ),
             ElevatedButton(
-              onPressed: responder,
+              onPressed: _responder,
               child: Text("Texto do botão 3"),
             ),
           ],
@@ -55,7 +55,7 @@ class QuizAppState extends State<QuizApp> {
 
 class QuizApp extends StatefulWidget {
   @override
-  QuizAppState createState() {
-    return new QuizAppState();
+  _QuizAppState createState() {
+    return new _QuizAppState();
   }
 }
