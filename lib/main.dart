@@ -13,7 +13,7 @@ class _QuizAppState extends State<QuizApp> {
 
   void _responder() {
     setState(() {
-      if (_perguntaSelecionada < 3) {
+      if (_perguntaSelecionada < 2) {
         _perguntaSelecionada++;
       }
     });
@@ -31,12 +31,26 @@ class _QuizAppState extends State<QuizApp> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> perguntas = [
-      "Qual sua idade?",
-      "Qual seu curso na faculdade?",
-      "Você trabalha?",
-      "Qual time você torce?"
+    final List<Map<String, Object>> perguntas = [
+      {
+        'texto': "Qual sua cor favorita?",
+        "respostas": ["Azul", "Vermelho", "Verde", "Rosa"]
+      },
+      {
+        "texto": "Qual seu time de futebol?",
+        "respostas": ["Grêmio", "Internacional", "Juventude", "Caxias"]
+      },
+      {
+        "texto": "Qual seu animal favorito?",
+        "respostas": ["Leão", "Cachorro", "Gato", "Coelho"]
+      },
     ];
+
+    List<Widget> respostas = [];
+
+    for (var textList in perguntas[_perguntaSelecionada].cast()['respostas']) {
+      respostas.add(Resposta(textList, _responder));
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -45,10 +59,8 @@ class _QuizAppState extends State<QuizApp> {
         ),
         body: Column(
           children: <Widget>[
-            Questao(perguntas[_perguntaSelecionada]),
-            Resposta("Texto btn 1", _responder),
-            Resposta("Texto btn 2", _responder),
-            Resposta("Texto btn 3", _responder),
+            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+            ...respostas,
             Resposta("Voltar para a primeira", _zerar),
           ],
         ),
