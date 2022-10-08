@@ -71,7 +71,12 @@ class _QuizAppState extends State<QuizApp> {
                   Resposta("Voltar para a primeira", _zerar),
                 ],
               )
-            : null,
+            : Center(
+                child: Text(
+                  'Parabéns!',
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
       ),
     );
   }
