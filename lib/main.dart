@@ -11,14 +11,31 @@ main() {
 class _QuizAppState extends State<QuizApp> {
   int _perguntaSelecionada = 0;
 
+  final List<Map<String, Object>> perguntas = [
+    {
+      'texto': "Qual sua cor favorita?",
+      "respostas": ["Azul", "Vermelho", "Verde", "Rosa"]
+    },
+    {
+      "texto": "Qual seu time de futebol?",
+      "respostas": ["Grêmio", "Internacional", "Juventude", "Caxias"]
+    },
+    {
+      "texto": "Qual seu animal favorito?",
+      "respostas": ["Leão", "Cachorro", "Gato", "Coelho"]
+    },
+  ];
+
   void _responder() {
     setState(() {
-      if (_perguntaSelecionada < 2) {
-        _perguntaSelecionada++;
-      }
+      _perguntaSelecionada++;
     });
 
     print(_perguntaSelecionada);
+  }
+
+  bool get temPergSelecionada {
+    return _perguntaSelecionada < perguntas.length;
   }
 
   void _zerar() {
@@ -31,23 +48,9 @@ class _QuizAppState extends State<QuizApp> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, Object>> perguntas = [
-      {
-        'texto': "Qual sua cor favorita?",
-        "respostas": ["Azul", "Vermelho", "Verde", "Rosa"]
-      },
-      {
-        "texto": "Qual seu time de futebol?",
-        "respostas": ["Grêmio", "Internacional", "Juventude", "Caxias"]
-      },
-      {
-        "texto": "Qual seu animal favorito?",
-        "respostas": ["Leão", "Cachorro", "Gato", "Coelho"]
-      },
-    ];
-
-    List<String> respostas =
-        perguntas[_perguntaSelecionada].cast()['respostas'];
+    List<String> respostas = temPergSelecionada
+        ? perguntas[_perguntaSelecionada].cast()['respostas']
+        : [];
     List<Widget> widgets =
         respostas.map((text) => Resposta(text, _responder)).toList();
 
@@ -60,13 +63,15 @@ class _QuizAppState extends State<QuizApp> {
         appBar: AppBar(
           title: Text("Título"),
         ),
-        body: Column(
-          children: <Widget>[
-            Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-            ...widgets,
-            Resposta("Voltar para a primeira", _zerar),
-          ],
-        ),
+        body: temPergSelecionada
+            ? Column(
+                children: <Widget>[
+                  Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+                  ...widgets,
+                  Resposta("Voltar para a primeira", _zerar),
+                ],
+              )
+            : null,
       ),
     );
   }
