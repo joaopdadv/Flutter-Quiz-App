@@ -72,9 +72,26 @@ class _QuizAppState extends State<QuizApp> {
                 ],
               )
             : Center(
-                child: Text(
-                  'Parabéns!',
-                  style: TextStyle(fontSize: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Parabéns!',
+                      style: TextStyle(fontSize: 28),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            _perguntaSelecionada = 0;
+                          });
+                        },
+                        child: const Text('Tentar Novamente'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
       ),
